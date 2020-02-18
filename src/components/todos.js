@@ -12,6 +12,14 @@ const StyledTodos = styled.div `
 
     li {
       margin: 1rem 0;
+
+      input[type="checkbox"] {
+        background: transparent;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+
+      }
     }
   }
 
@@ -83,7 +91,13 @@ export default class Todos extends React.Component {
         <h1>Todo</h1>
         <ul>
           {this.state.todos.map(todo => 
-            <li key={todo}>{todo}</li>  
+            <li key={todo}>
+              {todo}
+              <label>One
+                <input type='checkbox'/>
+                <span/>
+              </label>
+            </li>  
           )}
         </ul>
         <form onSubmit={this.addTodo}>
