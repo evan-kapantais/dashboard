@@ -13,24 +13,29 @@ const StyledTodos = styled.div `
   }
 
   ul {
-    list-style: none;
-    padding: 0;
+    margin: 4rem 0;
 
     li {
-      margin: 1rem 0;
+      margin: 1.5rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      p {
-        margin: 0;
+      div {
+        display: flex;
+        align-items: center;
+
+        button {
+          margin-left: 0.5rem;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
       }
     }
   }
 
   form {
-    padding: 0;
-    margin: 4rem 0 0 0;
     display: flex;
     justify-content: space-between;
 
@@ -58,40 +63,19 @@ export default class Todos extends React.Component {
     super(props);
     this.state = {
       inputValue: '',
-      todos: [
-        {
-          name: 'do the dishes',
-          completed: false
-        },
-        {
-          name: 'complete task',
-          completed: true
-        },
-        {
-          name: 'apply to job',
-          completed: false
-        },
-        {
-          name: 'do the sound design',
-          completed: false
-        },
-        {
-          name: 'complete dashboard project',
-          completed: true
-        },
-      ]
+      todos: []
     }
   }
 
-  componentDidMount() {
-    
+  componentDidMount = () => {
+    const storedList = JSON.parse(localStorage.getItem('todos'));
+
+    this.setState({
+      todos: [...storedList]
+    });
   }
 
-  componentDidUpdate() {
-    console.log(this.state.todos);
-  }
-
-  markCompleted(todo) {
+  markCompleted = (todo) => {
     let index = null;
     let newList = [];
 
@@ -105,6 +89,17 @@ export default class Todos extends React.Component {
     this.setState({
       todos: newList
     });
+
+    localStorage.setItem('todos', JSON.stringify(newList));
+  }
+
+  deleteItem = (todo) => {
+    let filteredList = this.state.todos.filter(item => item.name !== todo.name);
+    localStorage.setItem('todos', JSON.stringify(filteredList));
+
+    this.setState({
+      todos: filteredList
+    });
   }
 
   onChange = (e) => {
@@ -115,11 +110,23 @@ export default class Todos extends React.Component {
 
   addTodo = (e) => {
     e.preventDefault();
+
+    const newItem = {name: this.state.inputValue, completed: false};
+    let storedList = JSON.parse(localStorage.getItem('todos'));
+    let newList = [];
+
+    if (storedList === null) {
+      newList = [newItem];
+    } else {
+      newList = [...storedList, newItem];
+    }
+
+    localStorage.setItem('todos', JSON.stringify(newList));
+
     this.setState({
       inputValue: '',
       todos: [...this.state.todos, {name: this.state.inputValue, completed: false}],
     });
-    console.log(this.state.todos);
   }
 
   render() {
@@ -130,10 +137,17 @@ export default class Todos extends React.Component {
           {this.state.todos.map(todo => 
             <li key={todo.name}>
               <p>{todo.name}</p>
-              <Checkmark 
-              checked={todo.completed}
-              markCompleted={() => this.markCompleted(todo)}
-              />
+              <div>
+                <Checkmark 
+                checked={todo.completed}
+                markCompleted={() => this.markCompleted(todo)}
+                />
+                <button
+                onClick={() => this.deleteItem(todo)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </button>
+              </div>
             </li>
           )}
         </ul>
