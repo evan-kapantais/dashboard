@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Checkmark from './checkmark'
 
 const StyledTodos = styled.div `
   h1 {
@@ -12,14 +13,9 @@ const StyledTodos = styled.div `
 
     li {
       margin: 1rem 0;
-
-      input[type="checkbox"] {
-        background: transparent;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-
-      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
@@ -93,12 +89,13 @@ export default class Todos extends React.Component {
           {this.state.todos.map(todo => 
             <li key={todo}>
               {todo}
-              <label>One
-                <input type='checkbox'/>
-                <span/>
-              </label>
-            </li>  
+              <Checkmark />
+            </li>
           )}
+          <li>
+            Walk the dog
+            <Checkmark />
+          </li>
         </ul>
         <form onSubmit={this.addTodo}>
           <input type="text" value={this.state.inputValue} onChange={this.onChange} placeholder='new todo' required />
