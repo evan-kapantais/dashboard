@@ -10,8 +10,8 @@ const StyledCheckmark = styled.label `
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   border: 1px solid #fff;
   border-radius: 50%;
 
@@ -34,11 +34,11 @@ const StyledCheckmark = styled.label `
       position: absolute;
       display: none;
       left: 9px;
-      top: 5px;
+      top: -3px;
       width: 5px;
-      height: 10px;
+      height: 16px;
       border: solid white;
-      border-width: 0 3px 3px 0;
+      border-width: 0 1px 1px 0;
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
       transform: rotate(45deg);
