@@ -53,18 +53,11 @@ export default class Todos extends React.Component {
   }
 
   componentDidMount() {
-    let storedTodos = JSON.parse(localStorage.getItem('todos'));
-    if (storedTodos !== null) {
-      this.setState({
-        todos: [...storedTodos]
-      });
-    } else {
-      localStorage.setItem('todos', '[]');
-    }
+
   }
 
   componentDidUpdate() {
-        
+    
   }
 
   onChange = (e) => {
