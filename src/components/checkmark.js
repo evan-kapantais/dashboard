@@ -58,10 +58,14 @@ const StyledCheckmark = styled.label `
   }
 ` 
 
-export default function Checkmark() {
+export default function Checkmark(props) {
   return (
     <StyledCheckmark>
-      <input type='checkbox'/>
+      <input 
+      type='checkbox' 
+      checked={props.checked}
+      onChange={props.markCompleted} 
+      />
       <span/>
     </StyledCheckmark>  
   );
