@@ -11,13 +11,13 @@ import Todos from './components/todos'
 
 const StyledApp = styled.div `
   height: 100vh;
-  background: #555 url(${background}) no-repeat center / cover;
+  /* background: #555 url(${background}) no-repeat center / cover; */
   color: #fff;
 `
 
 function App() {
   return (
-    <StyledApp>
+    <StyledApp className="App">
       <Header />
       <Todos />
     </StyledApp>

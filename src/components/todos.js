@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import Checkmark from './checkmark'
 
 const StyledTodos = styled.div `
-  background: rgba(0, 0, 0, 0.5);
+
+  max-width: 20rem;
   padding: 2rem;
+  border: 1px solid;
   border-radius: 5px;
 
   h1 {
@@ -27,10 +29,7 @@ const StyledTodos = styled.div `
 
         button {
           margin-left: 0.5rem;
-          /* background: transparent; */
-          /* border: none; */
           cursor: pointer;
-          /* color: white; */
         }
       }
     }
@@ -47,6 +46,7 @@ const StyledTodos = styled.div `
       border: none;
       border-bottom: 1px solid #fff;
       margin-right: 1rem;
+      flex: 4;
 
       &:focus {
         border-bottom: 1px solid lightskyblue;
@@ -55,6 +55,9 @@ const StyledTodos = styled.div `
       ::placeholder {
         color: lightgrey;
       }
+    }
+    button {
+      flex: 1;
     }
   }
 `
@@ -72,7 +75,7 @@ export default class Todos extends React.Component {
     const storedList = JSON.parse(localStorage.getItem('todos'));
 
     this.setState({
-      todos: [...storedList]
+      todos: storedList || []
     });
   }
 
