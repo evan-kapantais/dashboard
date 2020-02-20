@@ -5,6 +5,7 @@ import './App.scss';
 import background from './images/julian-hochgesang-aG8iIT9_iqM-unsplash.jpg';
 import Header from './components/header'
 import Todos from './components/todos'
+import Weather from './components/weather'
 
 //TODO: add random background image from collection
 //TODO: whitespace string in todos
@@ -20,6 +21,7 @@ function App() {
     <StyledApp className="App">
       <Header />
       <Todos />
+      <Weather />
     </StyledApp>
   );
 }
