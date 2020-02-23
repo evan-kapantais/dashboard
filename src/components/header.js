@@ -26,7 +26,7 @@ const Header = () => {
     <StyledHeader>
       <Clock/>
       <div>
-        <h1>{Days[date.getDay() - 1]}</h1>
+        <h1>{Days[date.getDay()]}</h1>
         <p>{date.getDate()} {Months[date.getMonth()]}, {date.getFullYear()}</p>
       </div>
     </StyledHeader>

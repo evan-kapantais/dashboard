@@ -20,8 +20,10 @@ function App() {
   return (
     <StyledApp className="App">
       <Header />
-      <Todos />
-      <Weather />
+      <main>
+        <Todos />
+        <Weather />
+      </main>
     </StyledApp>
   );
 }
