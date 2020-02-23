@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import Checkmark from './checkmark'
 
 const StyledTodos = styled.div `
-
   max-width: 20rem;
   padding: 2rem;
   border: 1px solid;
@@ -59,6 +58,26 @@ const StyledTodos = styled.div `
     button {
       flex: 1;
     }
+  }
+`
+
+const ShowCompleted = styled.div `
+  button:first-child {
+    background: transparent;
+    border: none;
+    color: inherit;
+    outline: none;
+  }
+
+  i {
+    display: inline-block;
+    margin-left: 0.6rem;
+    width: 5px;
+    height: 5px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: translateY(-3px) rotate(45deg);
+    transition: all 200ms ease;
   }
 `
 
@@ -138,7 +157,9 @@ export default class Todos extends React.Component {
       <StyledTodos>
         <h1>Todo</h1>
         <ul>
-          {this.state.todos.map(todo => 
+          {this.state.todos
+          .filter(todo => todo.completed === false)
+          .map(todo =>
             <li key={todo.name}>
               <p>{todo.name}</p>
               <div>
@@ -155,6 +176,29 @@ export default class Todos extends React.Component {
             </li>
           )}
         </ul>
+        <ShowCompleted>
+          <button>Show Completed</button>
+          <ul>
+            {this.state.todos
+            .filter(todo => todo.completed === true)
+            .map(todo => 
+              <li key={todo.name}>
+                <p>{todo.name}</p>
+                <div>
+                  <Checkmark 
+                  checked={todo.completed}
+                  markCompleted={() => this.markCompleted(todo)}
+                  />
+                  <button
+                  onClick={() => this.deleteItem(todo)}
+                  >
+                    delete
+                  </button>
+                </div>
+              </li>
+            )}
+          </ul>
+        </ShowCompleted>
         <form onSubmit={this.addTodo}>
           <input
           type="text" 
