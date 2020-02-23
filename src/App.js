@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import './App.scss';
 import background from './images/julian-hochgesang-aG8iIT9_iqM-unsplash.jpg';
 import Header from './components/header'
-import Todos from './components/todos'
+import Todos from './components/todos/todos'
 import Weather from './components/weather'
 
 //TODO: add random background image from collection

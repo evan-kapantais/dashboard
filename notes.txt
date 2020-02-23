@@ -1,0 +1,14 @@
+{/* <li key={todo.name}>
+  <p>{todo.name}</p>
+  <div>
+    <Checkmark 
+    checked={todo.completed}
+    markCompleted={() => this.markCompleted(todo)}
+    />
+    <button
+    onClick={() => this.deleteItem(todo)}
+    >
+      delete
+    </button>
+  </div>
+</li> */}

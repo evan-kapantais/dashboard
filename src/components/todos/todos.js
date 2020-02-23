@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import Checkmark from './checkmark'
+import TodoItem from './todo-item'
 
 const StyledTodos = styled.div `
   max-width: 20rem;
+  height: 500px;
   padding: 2rem;
   border: 1px solid;
   border-radius: 5px;
@@ -14,29 +17,13 @@ const StyledTodos = styled.div `
   }
 
   ul {
-    margin: 4rem 0;
-
-    li {
-      margin: 1.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      div {
-        display: flex;
-        align-items: center;
-
-        button {
-          margin-left: 0.5rem;
-          cursor: pointer;
-        }
-      }
-    }
+    margin: 2rem 0;
   }
 
   form {
     display: flex;
     justify-content: space-between;
+
 
     input {
       background: transparent;
@@ -160,20 +147,12 @@ export default class Todos extends React.Component {
           {this.state.todos
           .filter(todo => todo.completed === false)
           .map(todo =>
-            <li key={todo.name}>
-              <p>{todo.name}</p>
-              <div>
-                <Checkmark 
-                checked={todo.completed}
-                markCompleted={() => this.markCompleted(todo)}
-                />
-                <button
-                onClick={() => this.deleteItem(todo)}
-                >
-                  delete
-                </button>
-              </div>
-            </li>
+            <TodoItem
+            todo={todo}
+            key={todo.name}
+            markCompleted={this.markCompleted}
+            onClick={this.deleteItem}
+            />
           )}
         </ul>
         <ShowCompleted>
@@ -182,20 +161,12 @@ export default class Todos extends React.Component {
             {this.state.todos
             .filter(todo => todo.completed === true)
             .map(todo => 
-              <li key={todo.name}>
-                <p>{todo.name}</p>
-                <div>
-                  <Checkmark 
-                  checked={todo.completed}
-                  markCompleted={() => this.markCompleted(todo)}
-                  />
-                  <button
-                  onClick={() => this.deleteItem(todo)}
-                  >
-                    delete
-                  </button>
-                </div>
-              </li>
+              <TodoItem
+              todo={todo}
+              key={todo.name}
+              markCompleted={this.markCompleted}
+              onClick={this.deleteItem}
+              />
             )}
           </ul>
         </ShowCompleted>
