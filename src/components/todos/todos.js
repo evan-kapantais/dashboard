@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Checkmark from './checkmark'
 import TodoItem from './todo-item'
 
 const StyledTodos = styled.div `

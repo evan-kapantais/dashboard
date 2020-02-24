@@ -58,7 +58,7 @@ const StyledCheckmark = styled.label `
   }
 ` 
 
-export default function Checkmark(props) {
+const Checkmark = (props) => {
   return (
     <StyledCheckmark>
       <input 
@@ -70,3 +70,5 @@ export default function Checkmark(props) {
     </StyledCheckmark>  
   );
 }
+
+export default Checkmark;
