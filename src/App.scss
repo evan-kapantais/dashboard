@@ -4,12 +4,16 @@ body {
 }
 
 .App {
-  // background: #555 url('https://source.unsplash.com/collection/827743/1600x900') no-repeat center / cover;
-  // background: #555 url('./images/julian-hochgesang-aG8iIT9_iqM-unsplash.jpg') no-repeat center / cover;
+  background: #555 url('https://source.unsplash.com/collection/244339/1600x900') no-repeat center / cover;
+  background: #555 url('./images/ashim-d-silva-y41WzGJV4mU-unsplash.jpg') no-repeat center / cover;
+  background-blend-mode: darken;
+  color: #fff;
 }
 
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 p {

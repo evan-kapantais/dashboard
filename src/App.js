@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Layout>
         <Todos />
-        <Budget />
+        {/* <Budget /> */}
       </Layout>
     </div>
   );

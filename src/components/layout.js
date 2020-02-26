@@ -11,8 +11,8 @@ const SLayout = styled.div `
   justify-content: space-between;
 
   main {
-    /* display: flex; */
-    /* justify-content: center; */
+    display: flex;
+    justify-content: space-evenly;
   }
 `
 

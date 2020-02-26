@@ -4,66 +4,105 @@ import styled from 'styled-components'
 import TodoItem from './todo-item'
 
 const StyledTodos = styled.div `
-  max-width: 20rem;
-  max-height: 400px;
-  padding: 2rem;
+  position: relative;
+  min-width: 400px;
+  height: 500px;
+  padding: 1rem;
   border-radius: 5px;
-  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 
-  h1 {
+  header {
     border-bottom: 1px solid #fff;
-    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      background: transparent;
+      border: none;
+      color: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  main {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 82%;
+    padding-right: 0.5rem;
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background: #888; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+    }
   }
 
   ul {
     margin: 2rem 0;
   }
 
-  form {
-    display: flex;
-    justify-content: space-between;
-
-
-    input {
-      background: transparent;
-      color: #fff;
-      outline: none;
-      border: none;
-      border-bottom: 1px solid #fff;
-      margin-right: 1rem;
-      flex: 4;
-
-      &:focus {
-        border-bottom: 1px solid lightskyblue;
-      }
-      
-      ::placeholder {
-        color: lightgrey;
-      }
-    }
-    button {
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    
+    form {
+      display: flex;
+      justify-content: space-between;
       flex: 1;
+
+      input {
+        background: transparent;
+        color: #fff;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #fff;
+        margin-right: 1rem;
+        flex: 4;
+
+        &:focus {
+          border-bottom: 1px solid lightskyblue;
+        }
+        
+        ::placeholder {
+          color: lightgrey;
+        }
+      }
+      button {
+        flex: 1;
+      }
     }
   }
+
 `
 
-const ShowCompleted = styled.div `
-  button:first-child {
-    background: transparent;
-    border: none;
-    color: inherit;
-    outline: none;
+const CompletedList = styled.div `
+  display: ${props => props.shown === true ? 'auto' : 'none'};
+  margin-top: 2rem;
+
+  hr {
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
-  i {
-    display: inline-block;
-    margin-left: 0.6rem;
-    width: 5px;
-    height: 5px;
-    border-bottom: 2px solid #fff;
-    border-right: 2px solid #fff;
-    transform: translateY(-3px) rotate(45deg);
-    transition: all 200ms ease;
+  p:first-child {
+    text-decoration: underline;
   }
 `
 
@@ -72,16 +111,28 @@ export default class Todos extends React.Component {
     super(props);
     this.state = {
       inputValue: '',
-      todos: []
+      todos: [],
+      completedShown: false
     }
   }
 
   componentDidMount = () => {
     const storedList = JSON.parse(localStorage.getItem('todos'));
+    const storedCompletedShown = JSON.parse(localStorage.getItem('completedShown'));
 
     this.setState({
-      todos: storedList || []
+      todos: storedList || [],
+      completedShown: storedCompletedShown
     });
+  }
+
+  toggleCompleted = () => {
+
+    this.setState({
+      completedShown: !this.state.completedShown
+    });
+
+    localStorage.setItem('completedShown', !this.state.completedShown);
   }
 
   markCompleted = (todo) => {
@@ -138,47 +189,94 @@ export default class Todos extends React.Component {
     });
   }
 
+  onMouseEnter = (e) => {
+    const span = e.target.querySelector('span');
+
+    if (span === null) {return;}
+
+    setTimeout(() => {
+      span.style.opacity = 1;
+    }, 0);
+
+    span.style.display = 'block';
+
+    window.onmousemove = (e) => {
+      let x = e.clientX,
+          y = e.clientY;
+
+      span.style.top = `${y - 50}px`;
+      span.style.left = `${x}px`;
+    }
+  }
+
+  onMouseLeave = (e) => {
+    const span = e.target.querySelector('span');
+
+    if (span ===  null) {return;}
+
+    span.style.opacity = 0;
+
+    setTimeout(() => {
+      span.style.display = 'none';
+    }, 200);
+  }
+
+  onBlur = (todo) => {
+   
+  }
+
   render() {
     return (
       <StyledTodos>
-        <h1>Todo</h1>
-        <ul>
-          {this.state.todos
-          .filter(todo => todo.completed === false)
-          .map(todo =>
-            <TodoItem
-            todo={todo}
-            key={todo.name}
-            markCompleted={this.markCompleted}
-            deleteItem={this.deleteItem}
-            />
-          )}
-        </ul>
-        <ShowCompleted>
-          <button>Show Completed</button>
+        <header>
+          <h1>Todo</h1>
+          <button onClick={this.toggleCompleted}>Show Completed</button>
+        </header>
+        <main>  
           <ul>
             {this.state.todos
-            .filter(todo => todo.completed === true)
-            .map(todo => 
+            .filter(todo => todo.completed === false)
+            .map(todo =>
               <TodoItem
               todo={todo}
               key={todo.name}
               markCompleted={this.markCompleted}
               deleteItem={this.deleteItem}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              onBlur={this.onBlur}
               />
             )}
           </ul>
-        </ShowCompleted>
-        <form onSubmit={this.addTodo}>
-          <input
-          type="text" 
-          value={this.state.inputValue} 
-          onChange={this.onChange} 
-          placeholder='new todo' 
-          required
-          />
-          <button type='submit'>Add Todo</button>
-        </form>
+          <CompletedList shown={this.state.completedShown}>
+            {/* <p>Completed</p> */}
+            <hr/>
+            <ul>
+              {this.state.todos
+              .filter(todo => todo.completed === true)
+              .map(todo => 
+                <TodoItem
+                todo={todo}
+                key={todo.name}
+                markCompleted={this.markCompleted}
+                deleteItem={this.deleteItem}
+                />
+              )}
+            </ul>
+          </CompletedList>
+        </main>
+        <footer>
+          <form onSubmit={this.addTodo}>
+            <input
+            type="text" 
+            value={this.state.inputValue} 
+            onChange={this.onChange} 
+            placeholder='new todo' 
+            required
+            />
+            <button type='submit'>Add Todo</button>
+          </form>
+        </footer>
       </StyledTodos>
     );
   }
