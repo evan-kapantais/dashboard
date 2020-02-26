@@ -5,7 +5,7 @@ import TodoItem from './todo-item'
 
 const StyledTodos = styled.div `
   position: relative;
-  min-width: 400px;
+  width: 400px;
   height: 500px;
   padding: 1rem;
   border-radius: 5px;
@@ -74,6 +74,7 @@ const StyledTodos = styled.div `
         outline: none;
         border: none;
         border-bottom: 1px solid #fff;
+        font-size: 1.2rem;
         margin-right: 1rem;
         flex: 4;
 

@@ -12,6 +12,7 @@ const StyledItem = styled.li `
   div {
     display: flex;
     align-items: center;
+    max-width: calc(100% - 22px - 2rem);
 
     button {
       margin-right: 1rem;
