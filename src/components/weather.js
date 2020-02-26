@@ -4,7 +4,6 @@ import styled from 'styled-components'
 //TODO: imperial / metric toggle
 
 const WeatherWidget = styled.div `
-  border: 1px solid;
 
   header {
     display: flex;
@@ -20,8 +19,6 @@ export class Weather extends Component {
       weatherData: {},
     }
   }
-
-  // Weather Data
 
   abortController = new AbortController();
 

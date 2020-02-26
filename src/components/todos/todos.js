@@ -5,10 +5,10 @@ import TodoItem from './todo-item'
 
 const StyledTodos = styled.div `
   max-width: 20rem;
-  height: 500px;
+  max-height: 400px;
   padding: 2rem;
-  border: 1px solid;
   border-radius: 5px;
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
 
   h1 {
     border-bottom: 1px solid #fff;
@@ -150,7 +150,7 @@ export default class Todos extends React.Component {
             todo={todo}
             key={todo.name}
             markCompleted={this.markCompleted}
-            onClick={this.deleteItem}
+            deleteItem={this.deleteItem}
             />
           )}
         </ul>
@@ -164,7 +164,7 @@ export default class Todos extends React.Component {
               todo={todo}
               key={todo.name}
               markCompleted={this.markCompleted}
-              onClick={this.deleteItem}
+              deleteItem={this.deleteItem}
               />
             )}
           </ul>

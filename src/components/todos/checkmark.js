@@ -12,7 +12,7 @@ const StyledCheckmark = styled.label `
   user-select: none;
   height: 20px;
   width: 20px;
-  border: 1px solid #fff;
+  border: 2px solid;
   border-radius: 50%;
 
   input {
@@ -37,8 +37,8 @@ const StyledCheckmark = styled.label `
       top: -3px;
       width: 5px;
       height: 16px;
-      border: solid white;
-      border-width: 0 1px 1px 0;
+      border: solid;
+      border-width: 0 2px 2px 0;
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
       transform: rotate(45deg);
