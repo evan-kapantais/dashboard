@@ -190,38 +190,6 @@ export default class Todos extends React.Component {
     });
   }
 
-  onMouseEnter = (e) => {
-    const span = e.target.querySelector('span');
-
-    if (span === null) {return;}
-
-    setTimeout(() => {
-      span.style.opacity = 1;
-    }, 0);
-
-    span.style.display = 'block';
-
-    window.onmousemove = (e) => {
-      let x = e.clientX,
-          y = e.clientY;
-
-      span.style.top = `${y - 50}px`;
-      span.style.left = `${x}px`;
-    }
-  }
-
-  onMouseLeave = (e) => {
-    const span = e.target.querySelector('span');
-
-    if (span ===  null) {return;}
-
-    span.style.opacity = 0;
-
-    setTimeout(() => {
-      span.style.display = 'none';
-    }, 200);
-  }
-
   onBlur = (todo) => {
    
   }

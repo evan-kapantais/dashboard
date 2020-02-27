@@ -30,22 +30,14 @@ const StyledItem = styled.li `
     }
 
     p {
-      /* font-weight: 600; */
       font-size: 1.2rem;
       position: relative;
+      border-bottom: 1px solid transparent;
+      transition: border-bottom 300ms ease;
 
-      span {
-        display: none;
-        position: fixed;
-        background: #fff;
-        color: #333;
-        font-weight: 600;
-        letter-spacing: 1px;
-        z-index: 10;
-        border-radius: 3px;
-        padding: 4px 16px;
-        opacity: 0;
-        transition: opacity 200ms ease;
+      &:hover {
+        /* outline: auto; */
+        /* border-bottom: 1px solid lightskyblue; */
       }
     }
   }
@@ -59,13 +51,10 @@ const StyledItem = styled.li `
           <img src={require('../../images/bin-white.png')} alt=""/>
         </button>
         <p 
-         
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
+        contentEditable
         onBlur={() => props.onBlur(props.todo)}
         >
           {props.todo.name}
-          <span>edit</span>
         </p>
       </div>
         <Checkmark
