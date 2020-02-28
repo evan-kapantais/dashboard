@@ -10,6 +10,8 @@ const StyledTodos = styled.div `
   padding: 1rem;
   border-radius: 5px;
   overflow: hidden;
+  /* background: rgba(255, 255, 255, 0.1); */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
 
   header {
     border-bottom: 1px solid #fff;
@@ -19,9 +21,8 @@ const StyledTodos = styled.div `
 
     button {
       background: transparent;
-      border: none;
+      padding: 5px 10px;
       color: inherit;
-      outline: none;
       cursor: pointer;
     }
   }
@@ -73,8 +74,9 @@ const StyledTodos = styled.div `
         color: #fff;
         outline: none;
         border: none;
+        padding: 0.5rem;
         border-bottom: 1px solid #fff;
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-right: 1rem;
         flex: 4;
 
@@ -88,6 +90,9 @@ const StyledTodos = styled.div `
       }
       button {
         flex: 1;
+        cursor: pointer;
+        background: transparent;
+        color: inherit;
       }
     }
   }
